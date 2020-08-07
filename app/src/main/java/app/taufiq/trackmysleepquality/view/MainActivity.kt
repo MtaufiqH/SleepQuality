@@ -1,7 +1,8 @@
-package app.taufiq.trackmysleepquality
+package app.taufiq.trackmysleepquality.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import app.taufiq.trackmysleepquality.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
