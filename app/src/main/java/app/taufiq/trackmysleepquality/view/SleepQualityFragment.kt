@@ -4,14 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import app.taufiq.trackmysleepquality.R
+import app.taufiq.trackmysleepquality.databinding.FragmentSleepQualityBinding
 
 
 /**
- * A simple [Fragment] subclass.
- * Use the [SleepQualityFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Fragment that displays a list of clickable icons,
+ * each representing a sleep quality rating.
+ * Once the user taps an icon, the quality is set in the current sleepNight
+ * and the database is updated.
  */
 class SleepQualityFragment : Fragment() {
 
@@ -21,7 +24,12 @@ class SleepQualityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sleep_quality, container, false)
+        val binding = DataBindingUtil.inflate<FragmentSleepQualityBinding>(inflater,R.layout.fragment_sleep_quality,
+        container,false)
+        return binding.root
+        // return inflater.inflate(R.layout.fragment_sleep_quality, container, false)
     }
 
 }
+
+

@@ -37,4 +37,10 @@
     <string name="cleared_message">All your data is gone forever.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sleep_quality_zero">sleep quality zero</string>
+    <string name="sleep_quality_one">sleep quality one</string>
+    <string name="sleep_quality_two">Sleep Quality two</string>
+    <string name="sleep_quality_three">Sleep Quality Three</string>
+    <string name="sleep_quality_four">Sleep Quality Four</string>
+    <string name="sleep_quality_five">Sleep Quality Five</string>
 </resources>

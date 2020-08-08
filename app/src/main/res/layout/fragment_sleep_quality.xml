@@ -1,14 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.SleepQualityFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Data to make available to the XML via data binding. In this case,
+     the whole ViewModel, so that we can access the LiveData,
+     click handlers, and state variables. -->
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".view.SleepQualityFragment">
 
-</FrameLayout>
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:text="@string/how_was_hour_sleep"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/zero_quality"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:src="@drawable/ic_sleep_0"
+            app:layout_constraintEnd_toStartOf="@+id/one_quality"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_text"
+            android:contentDescription="@string/sleep_quality_zero" />
+
+        <ImageView
+            android:id="@+id/one_quality"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:src="@drawable/ic_sleep_1"
+            app:layout_constraintBottom_toBottomOf="@+id/zero_quality"
+            app:layout_constraintEnd_toStartOf="@+id/two_quality"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/zero_quality"
+            android:contentDescription="@string/sleep_quality_one" />
+
+        <ImageView
+            android:id="@+id/two_quality"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginEnd="@dimen/margin"
+            android:src="@drawable/ic_sleep_2"
+            app:layout_constraintBottom_toBottomOf="@+id/one_quality"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/one_quality"
+            android:contentDescription="@string/sleep_quality_two" />
+
+        <ImageView
+            android:id="@+id/three_quality"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_sleep_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/four_quality"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/zero_quality"
+            app:layout_constraintVertical_bias="0.039"
+            android:contentDescription="@string/sleep_quality_three" />
+
+        <ImageView
+            android:id="@+id/four_quality"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:src="@drawable/ic_sleep_4"
+            app:layout_constraintBottom_toBottomOf="@+id/three_quality"
+            app:layout_constraintEnd_toStartOf="@+id/five_quality"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/three_quality"
+            app:layout_constraintTop_toTopOf="@+id/three_quality"
+            android:contentDescription="@string/sleep_quality_four" />
+
+        <ImageView
+            android:id="@+id/five_quality"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginEnd="@dimen/margin"
+            android:src="@drawable/ic_sleep_5"
+            app:layout_constraintBottom_toBottomOf="@+id/four_quality"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/four_quality"
+            app:layout_constraintTop_toTopOf="@+id/four_quality"
+            android:contentDescription="@string/sleep_quality_five" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
