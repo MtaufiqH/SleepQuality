@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/sleep_navigation">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sleep_navigation"
+    app:startDestination="@id/sleepTrackerFragment">
+
+    <!--Fragment 1-->
+    <fragment
+        android:id="@+id/sleepTrackerFragment"
+        android:name="app.taufiq.trackmysleepquality.view.SleepTrackerFragment"
+        android:label="SleepTrackerFragment"
+        tools:layout="@layout/fragment_sleep_tracker">
+        <action
+            android:id="@+id/to_sleepQuality"
+            app:destination="@id/sleepQualityFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_in_right" />
+    </fragment>
+
+    <!--Fragment 2-->
+    <fragment
+        android:id="@+id/sleepQualityFragment"
+        android:name="app.taufiq.trackmysleepquality.view.SleepQualityFragment"
+        android:label="SleepQualityFragment"
+        tools:layout="@layout/fragment_sleep_quality">
+        <action
+            android:id="@+id/to_sleepTracker"
+            app:destination="@id/sleepTrackerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_in_right"
+            app:popUpTo="@id/sleepTrackerFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="sleepNightKey"
+            app:argType="long" />
+    </fragment>
+
 
 </navigation>
