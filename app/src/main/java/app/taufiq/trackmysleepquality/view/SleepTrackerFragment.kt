@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import app.taufiq.trackmysleepquality.R
 import app.taufiq.trackmysleepquality.databinding.FragmentSleepTrackerBinding
 import app.taufiq.trackmysleepquality.db.SleepDatabase
@@ -44,6 +46,15 @@ class SleepTrackerFragment : Fragment() {
 
         // assign data variable in to the @sleepTrackerViewModel
         binding.sleepTrackerViewModel = sleepTrackerViewModels
+
+
+        sleepTrackerViewModels._navigateToSleepQuality.observe(viewLifecycleOwner, Observer { night ->
+            night?.let {
+                this.findNavController().navigate(SleepTrackerFragmentDirections.toSleepQuality(night.nightId))
+                sleepTrackerViewModels.doneNavigating()
+            }
+
+        })
 
 
         return binding.root
