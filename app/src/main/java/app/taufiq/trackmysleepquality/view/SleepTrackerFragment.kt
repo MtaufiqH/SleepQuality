@@ -14,6 +14,7 @@ import app.taufiq.trackmysleepquality.databinding.FragmentSleepTrackerBinding
 import app.taufiq.trackmysleepquality.db.SleepDatabase
 import app.taufiq.trackmysleepquality.viewmodel.SleepTrackerViewModel
 import app.taufiq.trackmysleepquality.viewmodel.SleepTrackerViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 
 /**
@@ -54,6 +55,17 @@ class SleepTrackerFragment : Fragment() {
                 sleepTrackerViewModels.doneNavigating()
             }
 
+        })
+
+        sleepTrackerViewModels._showSnackbars.observe(viewLifecycleOwner, Observer {
+            if (it == true){
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.cleared_message),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                sleepTrackerViewModels.doneShowingSnackbar()
+            }
         })
 
 
