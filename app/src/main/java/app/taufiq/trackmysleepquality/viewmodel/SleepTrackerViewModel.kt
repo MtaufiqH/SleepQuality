@@ -22,6 +22,7 @@ class SleepTrackerViewModel(val database: SleepDao, application: Application) :
     /**
      * Using Dispatchers.Main means that coroutines launched in the uiScope will run on the main thread.
      * */
+    // scope with dispatcher
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val nights = database.getAllNights()
@@ -47,6 +48,7 @@ class SleepTrackerViewModel(val database: SleepDao, application: Application) :
         initializeTonight()
     }
 
+    // create a coroutines with launch
     private fun initializeTonight() {
         uiScope.launch {
             tonight.value = getTonightFromDatabase()
@@ -54,7 +56,6 @@ class SleepTrackerViewModel(val database: SleepDao, application: Application) :
     }
 
     private suspend fun getTonightFromDatabase(): SleepNight? {
-
         return withContext(Dispatchers.IO) {
             var night = database.getTonight()
             if (night?.endTimeMilli != night?.startTimeMilli) {
