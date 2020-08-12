@@ -27,31 +27,23 @@
             android:id="@+id/sleepList"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tracker_scroll_view"
+            tools:listitem="@layout/text_item_layout"
+            app:layout_constraintBottom_toTopf="@+id/clearButtons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/stopButton" />
 
-        <ScrollView
-            android:id="@+id/tracker_scroll_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/clearButtons"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stopButton">
 
-            <TextView
+           <!-- <TextView
                 android:id="@+id/textHowWasYourSleep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin"
                 android:layout_marginTop="@dimen/margin"
                 android:layout_marginEnd="@dimen/margin"
-                android:text="@{sleepTrackerViewModel.nightString}" />
+                android:text="@{sleepTrackerViewModel.nightString}" />-->
 
-        </ScrollView>
 
         <Button
             android:id="@+id/startButtons"
