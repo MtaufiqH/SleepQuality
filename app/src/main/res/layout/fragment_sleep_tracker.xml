@@ -23,6 +23,16 @@
         android:layout_height="match_parent"
         tools:context=".view.SleepTrackerFragment">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sleepList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tracker_scroll_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/stopButton" />
+
         <ScrollView
             android:id="@+id/tracker_scroll_view"
             android:layout_width="0dp"

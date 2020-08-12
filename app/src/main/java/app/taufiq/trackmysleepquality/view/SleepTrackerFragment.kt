@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import app.taufiq.trackmysleepquality.R
+import app.taufiq.trackmysleepquality.adapter.SleepNightAdapter
 import app.taufiq.trackmysleepquality.databinding.FragmentSleepTrackerBinding
 import app.taufiq.trackmysleepquality.db.SleepDatabase
 import app.taufiq.trackmysleepquality.viewmodel.SleepTrackerViewModel
@@ -65,6 +66,16 @@ class SleepTrackerFragment : Fragment() {
                     Snackbar.LENGTH_SHORT
                 ).show()
                 sleepTrackerViewModels.doneShowingSnackbar()
+            }
+        })
+
+
+        val adapter = SleepNightAdapter()
+        binding.sleepList.adapter = adapter
+
+        sleepTrackerViewModels.nights.observe(viewLifecycleOwner, Observer { allNights ->
+            allNights?.let {
+                adapter.data = allNights
             }
         })
 

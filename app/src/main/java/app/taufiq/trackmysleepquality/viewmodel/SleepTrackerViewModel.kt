@@ -25,7 +25,7 @@ class SleepTrackerViewModel(val database: SleepDao, application: Application) :
     // scope with dispatcher
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val nights = database.getAllNights()
+    val nights = database.getAllNights()
 
     val nightString = Transformations.map(nights) {
         formatNights(it, application.resources)
