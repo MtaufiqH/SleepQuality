@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.taufiq.trackmysleepquality.R
 import app.taufiq.trackmysleepquality.db.SleepNight
@@ -15,29 +17,23 @@ import app.taufiq.trackmysleepquality.util.convertNumericQualityToString
  * Created By Taufiq on 8/12/2020.
  *
  */
-class SleepNightAdapter : RecyclerView.Adapter<SleepNightAdapter.viewHolder>() {
+class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.viewHolder>(SleepNightDiffCallback()) {
     // list of the night
-    var data = listOf<SleepNight>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+//    var data = listOf<SleepNight>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-        return viewHolder.from(parent)
-    }
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
+         return viewHolder.from(parent)
+     }
 
-    override fun getItemCount() = data.size
+    /* override fun getItemCount() = data.size*/
 
     /** The onBindViewHolder()function is called by RecyclerView
      * to display the data for one list item
      * at the specified position.*/
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.binding(item)
     }
-
-
 
 
     class viewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -50,7 +46,8 @@ class SleepNightAdapter : RecyclerView.Adapter<SleepNightAdapter.viewHolder>() {
 
         fun binding(item: SleepNight) {
             val res = itemView.context.resources
-            sleepLenght.text = convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, res)
+            sleepLenght.text =
+                convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, res)
             quality.text = convertNumericQualityToString(item.sleepQuality, res)
             qualityImage.setImageResource(
                 when (item.sleepQuality) {
@@ -77,5 +74,17 @@ class SleepNightAdapter : RecyclerView.Adapter<SleepNightAdapter.viewHolder>() {
     }
 
 
+    class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
+
+            override fun areItemsTheSame(oldItem: SleepNight, newItem: SleepNight) =
+                oldItem.nightId == newItem.nightId
+
+            override fun areContentsTheSame(oldItem: SleepNight, newItem: SleepNight) =
+                oldItem == newItem
+
+    }
+
 
 }
+
+
