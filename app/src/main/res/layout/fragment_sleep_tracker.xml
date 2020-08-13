@@ -35,14 +35,6 @@
             app:layout_constraintTop_toBottomOf="@+id/stopButton" />
 
 
-           <!-- <TextView
-                android:id="@+id/textHowWasYourSleep"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin"
-                android:layout_marginTop="@dimen/margin"
-                android:layout_marginEnd="@dimen/margin"
-                android:text="@{sleepTrackerViewModel.nightString}" />-->
 
 
         <Button

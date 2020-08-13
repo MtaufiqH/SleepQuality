@@ -1,7 +1,6 @@
 package app.taufiq.trackmysleepquality.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.taufiq.trackmysleepquality.R
+import app.taufiq.trackmysleepquality.databinding.ListItemSleepNightBinding
 import app.taufiq.trackmysleepquality.db.SleepNight
 import app.taufiq.trackmysleepquality.util.convertDurationToFormatted
 import app.taufiq.trackmysleepquality.util.convertNumericQualityToString
@@ -18,23 +18,26 @@ import app.taufiq.trackmysleepquality.util.convertNumericQualityToString
  *
  */
 class SleepNightAdapter :
-    ListAdapter<SleepNight, SleepNightAdapter.viewHolder>(SleepNightDiffCallback()) {
+    ListAdapter<SleepNight, SleepNightAdapter.MyViewHolder>(SleepNightDiffCallback()) {
     // list of the night
 //    var data = listOf<SleepNight>()
 
     // the view Holder
-    class viewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    // change parameter to the layout binding object
+    class MyViewHolder private constructor(binding: ListItemSleepNightBinding) :
+        // binding.root -> is the root ConstraintLayout in your item layout.
+        RecyclerView.ViewHolder(binding.root) {
+
         // get reference of the views
         // views that hold inside this, will be updated
-
-        val sleepLenght = itemView.findViewById<TextView>(R.id.sleep_length)
-        val quality = itemView.findViewById<TextView>(R.id.quality_string)
-        val qualityImage = itemView.findViewById<ImageView>(R.id.quality_image)
+        // replace findViewById with binding
+        val sleepLenght: TextView = binding.sleepLength
+        val quality: TextView= binding.qualityString
+        val qualityImage: ImageView = binding.qualityImage
 
         fun binding(item: SleepNight) {
             val res = itemView.context.resources
-            sleepLenght.text =
-                convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, res)
+            sleepLenght.text = convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, res)
             quality.text = convertNumericQualityToString(item.sleepQuality, res)
             qualityImage.setImageResource(
                 when (item.sleepQuality) {
@@ -51,17 +54,23 @@ class SleepNightAdapter :
 
 
         companion object {
-            fun from(parent: ViewGroup): viewHolder {
+            fun from(parent: ViewGroup): MyViewHolder {
                 val layoutInflate = LayoutInflater.from(parent.context)
-                val view = layoutInflate.inflate(R.layout.list_item_sleep_night, parent, false)
-                return viewHolder(view)
+
+                // inflate the item layout with binding
+                val binding = ListItemSleepNightBinding.inflate(layoutInflate, parent, false)
+                return MyViewHolder(binding)
+
+
+//                val view = layoutInflate.inflate(R.layout.list_item_sleep_night, parent, false)
+
             }
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-        return viewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        return MyViewHolder.from(parent)
     }
 
     /* override fun getItemCount() = data.size*/
@@ -69,7 +78,7 @@ class SleepNightAdapter :
     /** The onBindViewHolder()function is called by RecyclerView
      * to display the data for one list item
      * at the specified position.*/
-    override fun onBindViewHolder(holder: viewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = getItem(position)
         holder.binding(item)
     }
