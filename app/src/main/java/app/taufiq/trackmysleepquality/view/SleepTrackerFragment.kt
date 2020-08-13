@@ -75,7 +75,10 @@ class SleepTrackerFragment : Fragment() {
 
         sleepTrackerViewModels.nights.observe(viewLifecycleOwner, Observer { allNights ->
             allNights?.let {
-                adapter.data = allNights
+                /*the ListAdapter diffs the new list against the old one and detects items
+                 that were added, removed, moved, or changed.
+                 Then the ListAdapter updates the items shown by RecyclerView.*/
+                adapter.submitList(allNights)
             }
         })
 
