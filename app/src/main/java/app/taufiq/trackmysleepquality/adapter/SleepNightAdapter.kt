@@ -17,25 +17,12 @@ import app.taufiq.trackmysleepquality.util.convertNumericQualityToString
  * Created By Taufiq on 8/12/2020.
  *
  */
-class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.viewHolder>(SleepNightDiffCallback()) {
+class SleepNightAdapter :
+    ListAdapter<SleepNight, SleepNightAdapter.viewHolder>(SleepNightDiffCallback()) {
     // list of the night
 //    var data = listOf<SleepNight>()
 
-     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-         return viewHolder.from(parent)
-     }
-
-    /* override fun getItemCount() = data.size*/
-
-    /** The onBindViewHolder()function is called by RecyclerView
-     * to display the data for one list item
-     * at the specified position.*/
-    override fun onBindViewHolder(holder: viewHolder, position: Int) {
-        val item = getItem(position)
-        holder.binding(item)
-    }
-
-
+    // the view Holder
     class viewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // get reference of the views
         // views that hold inside this, will be updated
@@ -73,14 +60,29 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.viewHolder>(
 
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
+        return viewHolder.from(parent)
+    }
 
+    /* override fun getItemCount() = data.size*/
+
+    /** The onBindViewHolder()function is called by RecyclerView
+     * to display the data for one list item
+     * at the specified position.*/
+    override fun onBindViewHolder(holder: viewHolder, position: Int) {
+        val item = getItem(position)
+        holder.binding(item)
+    }
+
+
+    // difUtil
     class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
 
-            override fun areItemsTheSame(oldItem: SleepNight, newItem: SleepNight) =
-                oldItem.nightId == newItem.nightId
+        override fun areItemsTheSame(oldItem: SleepNight, newItem: SleepNight) =
+            oldItem.nightId == newItem.nightId
 
-            override fun areContentsTheSame(oldItem: SleepNight, newItem: SleepNight) =
-                oldItem == newItem
+        override fun areContentsTheSame(oldItem: SleepNight, newItem: SleepNight) =
+            oldItem == newItem
 
     }
 
