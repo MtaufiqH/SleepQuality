@@ -14,7 +14,7 @@ import app.taufiq.trackmysleepquality.db.SleepNight
 //This function will be your adapter for calculating and formatting the sleep duration
 @BindingAdapter("SleepDurationFormatted")
 fun TextView.setSleepDurationFormatted(item: SleepNight) {
-    text = convertNumericQualityToString(item.sleepQuality, context.resources)
+    text = convertDurationToFormatted(item.startTimeMilli,item.endTimeMilli, context.resources)
 
 }
 

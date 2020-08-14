@@ -2,30 +2,25 @@ package app.taufiq.trackmysleepquality.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import app.taufiq.trackmysleepquality.R
 import app.taufiq.trackmysleepquality.databinding.ListItemSleepNightBinding
 import app.taufiq.trackmysleepquality.db.SleepNight
-import app.taufiq.trackmysleepquality.util.convertDurationToFormatted
-import app.taufiq.trackmysleepquality.util.convertNumericQualityToString
 
 /**
  * Created By Taufiq on 8/12/2020.
  *
  */
-class SleepNightAdapter :
-    ListAdapter<SleepNight, SleepNightAdapter.MyViewHolder>(SleepNightDiffCallback()) {
+class SleepNightAdapter(val clickListener: SleepNightListener
+): ListAdapter<SleepNight, SleepNightAdapter.MyViewHolder>(SleepNightDiffCallback()) {
     // list of the night
 //    var data = listOf<SleepNight>()
 
     // the view Holder
     // change parameter to the layout binding object
     class MyViewHolder private constructor(private val binding: ListItemSleepNightBinding) :
-        // binding.root -> is the root ConstraintLayout in your item layout.
+    // binding.root -> is the root ConstraintLayout in your item layout.
         RecyclerView.ViewHolder(binding.root) {
 
         // get reference of the views
@@ -35,9 +30,14 @@ class SleepNightAdapter :
 //        val quality: TextView= binding.qualityString
 //        val qualityImage: ImageView = binding.qualityImage
 
-        fun bind(item: SleepNight) {
+        fun bind(
+            item: SleepNight,
+            clickListener: SleepNightListener
+        ) {
             binding.sleep = item
             binding.executePendingBindings()
+
+            binding.clickListener = clickListener
 
             /*val res = itemView.context.resources
             sleepLenght.text = convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, res)
@@ -84,7 +84,7 @@ class SleepNightAdapter :
      * at the specified position.*/
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(getItem(position)!!, clickListener)
     }
 
 
@@ -100,6 +100,11 @@ class SleepNightAdapter :
     }
 
 
+}
+
+
+class SleepNightListener(val clickListener: (sleepId: Long) -> Unit) {
+    fun onClick(night: SleepNight) = clickListener(night.nightId)
 }
 
 

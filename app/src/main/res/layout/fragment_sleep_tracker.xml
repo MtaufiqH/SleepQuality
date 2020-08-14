@@ -27,11 +27,11 @@
             android:id="@+id/sleepList"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            tools:listitem="@layout/text_item_layout"
-            app:layout_constraintBottom_toTopf="@+id/clearButtons"
+            app:layout_constraintBottom_toTopOf="@+id/clearButtons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stopButton" />
+            app:layout_constraintTop_toBottomOf="@+id/stopButton"
+            tools:listitem="@layout/list_item_sleep_night" />
 
 
 
@@ -47,7 +47,6 @@
             android:onClick="@{() -> sleepTrackerViewModel.onStartTracking()}"
             app:layout_constraintBaseline_toBaselineOf="@+id/stopButton"
             app:layout_constraintEnd_toStartOf="@+id/stopButton"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
