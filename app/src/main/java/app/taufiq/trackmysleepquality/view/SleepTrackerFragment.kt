@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import app.taufiq.trackmysleepquality.R
 import app.taufiq.trackmysleepquality.adapter.SleepNightAdapter
 import app.taufiq.trackmysleepquality.databinding.FragmentSleepTrackerBinding
@@ -81,6 +82,13 @@ class SleepTrackerFragment : Fragment() {
                 adapter.submitList(allNights)
             }
         })
+
+
+        //setup grid Layout
+        val gridLayout = GridLayoutManager(activity,3)
+        // optional
+        val manager = GridLayoutManager(activity, 5, GridLayoutManager.HORIZONTAL, false)
+        binding.sleepList.layoutManager = gridLayout
 
 
         return binding.root

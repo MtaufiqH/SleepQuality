@@ -24,19 +24,22 @@ class SleepNightAdapter :
 
     // the view Holder
     // change parameter to the layout binding object
-    class MyViewHolder private constructor(binding: ListItemSleepNightBinding) :
+    class MyViewHolder private constructor(private val binding: ListItemSleepNightBinding) :
         // binding.root -> is the root ConstraintLayout in your item layout.
         RecyclerView.ViewHolder(binding.root) {
 
         // get reference of the views
         // views that hold inside this, will be updated
         // replace findViewById with binding
-        val sleepLenght: TextView = binding.sleepLength
-        val quality: TextView= binding.qualityString
-        val qualityImage: ImageView = binding.qualityImage
+//        val sleepLenght: TextView = binding.sleepLength
+//        val quality: TextView= binding.qualityString
+//        val qualityImage: ImageView = binding.qualityImage
 
-        fun binding(item: SleepNight) {
-            val res = itemView.context.resources
+        fun bind(item: SleepNight) {
+            binding.sleep = item
+            binding.executePendingBindings()
+
+            /*val res = itemView.context.resources
             sleepLenght.text = convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, res)
             quality.text = convertNumericQualityToString(item.sleepQuality, res)
             qualityImage.setImageResource(
@@ -49,7 +52,8 @@ class SleepNightAdapter :
                     5 -> R.drawable.ic_sleep_5
                     else -> R.drawable.ic_sleep_active
                 }
-            )
+            )*/
+
         }
 
 
@@ -80,7 +84,7 @@ class SleepNightAdapter :
      * at the specified position.*/
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = getItem(position)
-        holder.binding(item)
+        holder.bind(item)
     }
 
 
